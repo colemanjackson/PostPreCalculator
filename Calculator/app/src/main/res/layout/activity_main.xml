@@ -4,39 +4,13 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10pt"
-        android:layout_marginRight="10pt"
-        android:layout_marginTop="3pt">
-
-        <EditText
-            android:id="@+id/etNum1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5pt"
-            android:layout_weight="1"
-            android:inputType="numberDecimal"></EditText>
-
-        <EditText
-            android:id="@+id/etNum2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5pt"
-            android:layout_weight="1"
-            android:inputType="numberDecimal"></EditText>
-    </LinearLayout>
-
     <RelativeLayout
         android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linearLayout1"
-        android:layout_marginLeft="5pt"
-        android:layout_marginRight="5pt"
-        android:layout_marginTop="3pt">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
         <Button
             android:id="@+id/btnAdd"
@@ -49,37 +23,121 @@
         </Button>
 
         <Button
+            android:id="@+id/btnOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btnAdd"
+            android:layout_toEndOf="@+id/btnAdd"
+            android:layout_weight="1"
+            android:text="1"
+            android:textSize="8pt">
+
+        </Button>
+
+        <Button
+            android:id="@+id/btnTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btnOne"
+            android:layout_toEndOf="@+id/btnOne"
+            android:layout_weight="1"
+            android:text="2"
+            android:textSize="8pt">
+
+        </Button>
+
+        <Button
+            android:id="@+id/btnThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btnTwo"
+            android:layout_toEndOf="@+id/btnTwo"
+            android:layout_weight="1"
+            android:text="3"
+            android:textSize="8pt">
+
+        </Button>
+
+        <Button
+            android:id="@+id/btnFour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="4"
+            android:textSize="8pt"
+            android:layout_above="@+id/btnMult"
+            android:layout_toRightOf="@+id/btnSub"
+            android:layout_toEndOf="@+id/btnSub">
+
+        </Button>
+
+        <Button
+            android:id="@+id/btnFive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnTwo"
+            android:layout_toRightOf="@id/btnFour"
+            android:layout_toEndOf="@+id/btnFour"
+            android:layout_weight="1"
+            android:text="5"
+            android:textSize="8pt">
+
+        </Button>
+
+
+        <Button
+            android:id="@+id/btnSix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnThree"
+            android:layout_toRightOf="@id/btnFive"
+            android:layout_toEndOf="@+id/btnFive"
+            android:layout_weight="1"
+            android:text="6"
+            android:textSize="8pt">
+
+        </Button>
+
+
+
+        <Button
             android:id="@+id/btnSub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/btnAdd"
+            android:layout_below="@+id/btnAdd"
             android:layout_weight="1"
             android:text="-"
-            android:textSize="8pt"></Button>
+            android:textSize="8pt">
+
+        </Button>
 
         <Button
             android:id="@+id/btnMult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/btnSub"
+            android:layout_below="@+id/btnSub"
             android:layout_weight="1"
             android:text="*"
-            android:textSize="8pt"></Button>
+            android:textSize="8pt">
+
+            </Button>
 
         <Button
             android:id="@+id/btnDiv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/btnMult"
+            android:layout_below="@+id/btnMult"
             android:layout_weight="1"
             android:text="/"
-            android:textSize="8pt"></Button>
+            android:textSize="8pt">
+
+            </Button>
 
         <CheckBox
             android:id="@+id/postfix_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnAdd"
+            android:layout_below="@+id/btnDiv"
             android:onClick="postfixClicked"
             android:text="@string/postfix_notation" />
 
@@ -87,22 +145,92 @@
             android:id="@+id/prefix_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/postfix_checkbox"
             android:onClick="prefixClicked"
-            android:text="@string/prefix_notation" />
+            android:text="@string/prefix_notation"
+            android:layout_below="@+id/btnZero"
+            android:layout_toRightOf="@+id/btnDiv"
+            android:layout_toEndOf="@+id/btnDiv" />
 
-        <TextView
-            android:id="@+id/tvResult"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btnSeven"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/prefix_checkbox"
-            android:layout_marginLeft="5pt"
-            android:layout_marginRight="5pt"
-            android:layout_marginTop="3pt"
-            android:gravity="center_horizontal"
-            android:textSize="12pt"></TextView>
+            android:layout_weight="1"
+            android:text="7"
+            android:textSize="8pt"
+            android:layout_below="@id/btnFour"
+            android:layout_toRightOf="@+id/btnMult"
+            android:layout_toEndOf="@+id/btnMult" />
+
+        <Button
+            android:id="@+id/btnEight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="8"
+            android:textSize="8pt"
+            android:layout_below="@id/btnFive"
+            android:layout_toRightOf="@+id/btnSeven"
+            android:layout_toEndOf="@+id/btnSeven" />
+
+        <Button
+            android:id="@+id/btnNine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="9"
+            android:textSize="8pt"
+            android:layout_below="@id/btnSix"
+            android:layout_toRightOf="@+id/btnEight"
+            android:layout_toEndOf="@+id/btnEight" />
+
+        <Button
+            android:id="@+id/btnEnter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="="
+            android:textSize="8pt"
+            android:layout_below="@+id/btnEight"
+            android:layout_toRightOf="@+id/btnEight"
+            android:layout_toEndOf="@+id/btnEight" />
+
+        <Button
+            android:id="@+id/btnZero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0"
+            android:textSize="8pt"
+            android:layout_alignTop="@+id/btnEnter"
+            android:layout_toRightOf="@+id/btnDiv"
+            android:layout_toEndOf="@+id/btnDiv" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="C"
+            android:textSize="8pt"
+            android:layout_below="@+id/btnEight"
+            android:layout_toLeftOf="@+id/btnNine"
+            android:layout_toEndOf="@+id/prefix_checkbox"
+            android:layout_alignLeft="@+id/btnEight"
+            android:layout_alignStart="@+id/btnEight" />
+
     </RelativeLayout>
 
+    <EditText
+        android:id="@+id/tvResult"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="20pt"
+        android:hint="Enter Values"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
