@@ -240,6 +240,100 @@ public class MainActivity extends Activity implements OnClickListener {
                 break;
         }
     }
+    
+    prefixCalculator(View v, Editable str)
+    {
+       switch (arg0.getId()) {
+            case R.id.btnOne:
+                
+                str = str.append(btnOne.getText());
+                disp.setText(str);
+                break;
+            case R.id.btnTwo:
+                
+                str = str.append(btnTwo.getText());
+                disp.setText(str);
+                break;
+            case R.id.btnThree:
+                
+                str = str.append(btnThree.getText());
+                disp.setText(str);
+                break;
+            case R.id.btnFour:
+                
+                str = str.append(btnFour.getText());
+                disp.setText(str);
+                break;
+            case R.id.btnFive:
+                
+                str = str.append(btnFive.getText());
+                disp.setText(str);
+                break;
+            case R.id.btnSix:
+                
+                str = str.append(btnSix.getText());
+                disp.setText(str);
+                break;
+            case R.id.btnSeven:
+                str = str.append(btnSeven.getText());
+                disp.setText(str);
+                break;
+            case R.id.btnEight:
+                str = str.append(btnEight.getText());
+                disp.setText(str);
+
+                break;
+            case R.id.btnNine:
+                str = str.append(btnNine.getText());
+                disp.setText(str);
+
+                break;
+            case R.id.cancel: //stays the same as in other function
+                op1 = 0;
+                op2 = 0;
+                disp.setText("");
+                disp.setHint("Perform Operation :)");
+
+                break;
+            case R.id.btnAdd:
+               str = str.append(btnAdd.getText());
+                disp.setText(str);
+                break;
+            case R.id.btnSub:
+                str = str.append(btnSub.getText());
+                disp.setText(str);
+                break;
+            case R.id.btnMult:
+                str = str.append(btnMult.getText());
+                disp.setText(str);
+                break;
+            case R.id.btnDiv:
+               str = str.append(btnDiv.getText());
+               disp.setText(str);
+              
+               break;
+            case R.id.btnEnter:
+                try
+                {
+                    int preFixResult =  prefixOperation(disp.getText().toString());
+                    disp.setText("");
+                    disp.setText("Result : " + Integer.toString(preFixResult));
+                }
+               catch(Exeception e)
+               {
+                   op1 = 0;
+                   op2 = 0;
+                   display.setText("");
+                   disp.setHint("Error in parsing, press C to Clear.");
+               }
+                break;
+        } 
+    }
+    
+    prefixOperation(String operation)
+    {
+        
+    }
 
     public void prefixClicked(View v) {
         if (prefixCheckbox.isChecked()) // if the box is click to be checked, meaning prefix notation is going to be used...
