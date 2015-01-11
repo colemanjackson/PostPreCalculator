@@ -1,5 +1,8 @@
 package com.example.coleman.calculator;
 
+import java.util.*;
+
+import android.util.*;
 import android.os.Bundle;
 import android.app.Activity;
 import android.text.Editable;
@@ -9,11 +12,16 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import java.lang.Exception;
+
 public class MainActivity extends Activity implements OnClickListener {
+    private static final String TAG = "MainActivity";
     private Boolean usePostFixParsing = false;
     private Boolean usePreFixParsing = false;
     private Boolean useInFixParsing = true;
-
+    public static final String CHARACTER = "\\+|\\-|\\*|\\/";
+    //formula for Unsigned Double credit goes to Cate Sheller
+    public static final String UNSIGNED_DOUBLE = "((\\d+\\.?\\d*)|(\\.\\d+))([Ee][-+]?\\d+)?.*?";
     private Button btnAdd, btnSub;
     private Button btnMult, btnDiv;
     private Button btnZero, btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix, btnSeven, btnEight, btnCancel;
@@ -22,8 +30,9 @@ public class MainActivity extends Activity implements OnClickListener {
     private EditText disp;
     private String optr = "";
     private String parseValue = "";
-    int op1;
-    int op2;
+    int mainOpOne;
+    int mainOpTwo;
+    private Stack<Double> preFixStack;
 
 
     /**
@@ -33,30 +42,31 @@ public class MainActivity extends Activity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.preFixStack = new Stack<>();
         prepareScreen();
     }
 
     public void inFixOperation() {
         if (optr.equals("+")) {
-            op2 = Integer.parseInt(disp.getText().toString());
+            mainOpTwo = Integer.parseInt(disp.getText().toString());
             disp.setText("");
-            op1 = op1 + op2;
-            disp.setText("Result : " + Integer.toString(op1));
+            mainOpOne = mainOpOne + mainOpTwo;
+            disp.setText("Result : " + Integer.toString(mainOpOne));
         } else if (optr.equals("-")) {
-            op2 = Integer.parseInt(disp.getText().toString());
+            mainOpTwo = Integer.parseInt(disp.getText().toString());
             disp.setText("");
-            op1 = op1 - op2;
-            disp.setText("Result : " + Integer.toString(op1));
+            mainOpOne = mainOpOne - mainOpTwo;
+            disp.setText("Result : " + Integer.toString(mainOpOne));
         } else if (optr.equals("*")) {
-            op2 = Integer.parseInt(disp.getText().toString());
+            mainOpTwo = Integer.parseInt(disp.getText().toString());
             disp.setText("");
-            op1 = op1 * op2;
-            disp.setText("Result : " + Integer.toString(op1));
+            mainOpOne = mainOpOne * mainOpTwo;
+            disp.setText("Result : " + Integer.toString(mainOpOne));
         } else if (optr.equals("/")) {
-            op2 = Integer.parseInt(disp.getText().toString());
+            mainOpTwo = Integer.parseInt(disp.getText().toString());
             disp.setText("");
-            op1 = op1 / op2;
-            disp.setText("Result : " + Integer.toString(op1));
+            mainOpOne = mainOpOne / mainOpTwo;
+            disp.setText("Result : " + Integer.toString(mainOpOne));
         }
     }
 
@@ -67,70 +77,80 @@ public class MainActivity extends Activity implements OnClickListener {
 
         if (!usePreFixParsing) {
             inFixCalculator(arg0, str);
+        } else {
+            prefixCalculator(arg0, str);
         }
+
     }
 
-    public void inFixCalculator(View arg0, Editable str){
-        switch (arg0.getId()) {
+    public void inFixCalculator(View arg0, Editable str) {
+                switch (arg0.getId()) {
+                    case R.id.btnZero:
+                if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
+                    disp.setText("");
+                }
+                str = str.append(btnZero.getText());
+                disp.setText(str);
             case R.id.btnOne:
-                if (op2 != 0) {
-                    op2 = 0;
+                if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 }
                 str = str.append(btnOne.getText());
                 disp.setText(str);
                 break;
             case R.id.btnTwo:
-                if (op2 != 0) {
-                    op2 = 0;
+                if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 }
                 str = str.append(btnTwo.getText());
                 disp.setText(str);
                 break;
             case R.id.btnThree:
-                if (op2 != 0) {
-                    op2 = 0;
+                if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 }
                 str = str.append(btnThree.getText());
                 disp.setText(str);
                 break;
             case R.id.btnFour:
-                if (op2 != 0) {
-                    op2 = 0;
+                if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 }
                 str = str.append(btnFour.getText());
                 disp.setText(str);
                 break;
             case R.id.btnFive:
-                if (op2 != 0) {
-                    op2 = 0;
+                if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 }
                 str = str.append(btnFive.getText());
                 disp.setText(str);
                 break;
             case R.id.btnSix:
-                if (op2 != 0) {
-                    op2 = 0;
+                if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 }
                 str = str.append(btnSix.getText());
                 disp.setText(str);
                 break;
             case R.id.btnSeven:
-                if (op2 != 0) {
-                    op2 = 0;
+                if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 }
                 str = str.append(btnSeven.getText());
                 disp.setText(str);
                 break;
             case R.id.btnEight:
-                if (op2 != 0) {
-                    op2 = 0;
+                if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 }
                 str = str.append(btnEight.getText());
@@ -138,8 +158,8 @@ public class MainActivity extends Activity implements OnClickListener {
 
                 break;
             case R.id.btnNine:
-                if (op2 != 0) {
-                    op2 = 0;
+                if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 }
                 str = str.append(btnNine.getText());
@@ -147,91 +167,91 @@ public class MainActivity extends Activity implements OnClickListener {
 
                 break;
             case R.id.cancel:
-                op1 = 0;
-                op2 = 0;
+                mainOpOne = 0;
+                mainOpTwo = 0;
                 disp.setText("");
                 disp.setHint("Perform Operation :)");
 
                 break;
             case R.id.btnAdd:
                 optr = "+";
-                if (op1 == 0) {
-                    op1 = Integer.parseInt(disp.getText().toString());
+                if (mainOpOne == 0) {
+                    mainOpOne = Integer.parseInt(disp.getText().toString());
                     disp.setText("");
-                } else if (op2 != 0) {
-                    op2 = 0;
+                } else if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 } else {
-                    op2 = Integer.parseInt(disp.getText().toString());
+                    mainOpTwo = Integer.parseInt(disp.getText().toString());
                     disp.setText("");
-                    op1 = op1 + op2;
-                    disp.setText("Result : " + Integer.toString(op1));
+                    mainOpOne = mainOpOne + mainOpTwo;
+                    disp.setText("Result : " + Integer.toString(mainOpOne));
                 }
                 break;
             case R.id.btnSub:
                 optr = "-";
-                if (op1 == 0) {
-                    op1 = Integer.parseInt(disp.getText().toString());
+                if (mainOpOne == 0) {
+                    mainOpOne = Integer.parseInt(disp.getText().toString());
                     disp.setText("");
-                } else if (op2 != 0) {
-                    op2 = 0;
+                } else if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 } else {
-                    op2 = Integer.parseInt(disp.getText().toString());
+                    mainOpTwo = Integer.parseInt(disp.getText().toString());
                     disp.setText("");
-                    op1 = op1 - op2;
-                    disp.setText("Result : " + Integer.toString(op1));
+                    mainOpOne = mainOpOne - mainOpTwo;
+                    disp.setText("Result : " + Integer.toString(mainOpOne));
                 }
                 break;
             case R.id.btnMult:
                 optr = "*";
-                if (op1 == 0) {
-                    op1 = Integer.parseInt(disp.getText().toString());
+                if (mainOpOne == 0) {
+                    mainOpOne = Integer.parseInt(disp.getText().toString());
                     disp.setText("");
-                } else if (op2 != 0) {
-                    op2 = 0;
+                } else if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 } else {
-                    op2 = Integer.parseInt(disp.getText().toString());
+                    mainOpTwo = Integer.parseInt(disp.getText().toString());
                     disp.setText("");
-                    op1 = op1 * op2;
-                    disp.setText("Result : " + Integer.toString(op1));
+                    mainOpOne = mainOpOne * mainOpTwo;
+                    disp.setText("Result : " + Integer.toString(mainOpOne));
                 }
                 break;
             case R.id.btnDiv:
                 optr = "/";
-                if (op1 == 0) {
-                    op1 = Integer.parseInt(disp.getText().toString());
+                if (mainOpOne == 0) {
+                    mainOpOne = Integer.parseInt(disp.getText().toString());
                     disp.setText("");
-                } else if (op2 != 0) {
-                    op2 = 0;
+                } else if (mainOpTwo != 0) {
+                    mainOpTwo = 0;
                     disp.setText("");
                 } else {
-                    op2 = Integer.parseInt(disp.getText().toString());
+                    mainOpTwo = Integer.parseInt(disp.getText().toString());
                     disp.setText("");
-                    op1 = op1 / op2;
-                    disp.setText("Result : " + Integer.toString(op1));
+                    mainOpOne = mainOpOne / mainOpTwo;
+                    disp.setText("Result : " + Integer.toString(mainOpOne));
                 }
                 break;
             case R.id.btnEnter:
                 if (!optr.equals(null)) {
-                    if (op2 != 0) {
+                    if (mainOpTwo != 0) {
                         if (optr.equals("+")) {
                             disp.setText("");
-                            op1 = op1 + op2;
-                            disp.setText("Result : " + Integer.toString(op1));
+                            mainOpOne = mainOpOne + mainOpTwo;
+                            disp.setText("Result : " + Integer.toString(mainOpOne));
                         } else if (optr.equals("-")) {
                             disp.setText("");
-                            op1 = op1 - op2;
-                            disp.setText("Result : " + Integer.toString(op1));
+                            mainOpOne = mainOpOne - mainOpTwo;
+                            disp.setText("Result : " + Integer.toString(mainOpOne));
                         } else if (optr.equals("*")) {
                             disp.setText("");
-                            op1 = op1 * op2;
-                            disp.setText("Result : " + Integer.toString(op1));
+                            mainOpOne = mainOpOne * mainOpTwo;
+                            disp.setText("Result : " + Integer.toString(mainOpOne));
                         } else if (optr.equals("/")) {
                             disp.setText("");
-                            op1 = op1 / op2;
-                            disp.setText("Result : " + Integer.toString(op1));
+                            mainOpOne = mainOpOne / mainOpTwo;
+                            disp.setText("Result : " + Integer.toString(mainOpOne));
                         }
                     } else {
                         inFixOperation();
@@ -240,37 +260,42 @@ public class MainActivity extends Activity implements OnClickListener {
                 break;
         }
     }
-    
-    prefixCalculator(View v, Editable str)
-    {
-       switch (arg0.getId()) {
+
+    public void prefixCalculator(View arg0, Editable str) {
+        switch (arg0.getId()) {
+            case R.id.btnZero:
+
+                str = str.append(btnZero.getText());
+                disp.setText(str);
+                break;
+
             case R.id.btnOne:
-                
+
                 str = str.append(btnOne.getText());
                 disp.setText(str);
                 break;
             case R.id.btnTwo:
-                
+
                 str = str.append(btnTwo.getText());
                 disp.setText(str);
                 break;
             case R.id.btnThree:
-                
+
                 str = str.append(btnThree.getText());
                 disp.setText(str);
                 break;
             case R.id.btnFour:
-                
+
                 str = str.append(btnFour.getText());
                 disp.setText(str);
                 break;
             case R.id.btnFive:
-                
+
                 str = str.append(btnFive.getText());
                 disp.setText(str);
                 break;
             case R.id.btnSix:
-                
+
                 str = str.append(btnSix.getText());
                 disp.setText(str);
                 break;
@@ -289,14 +314,14 @@ public class MainActivity extends Activity implements OnClickListener {
 
                 break;
             case R.id.cancel: //stays the same as in other function
-                op1 = 0;
-                op2 = 0;
+                mainOpOne = 0;
+                mainOpTwo = 0;
                 disp.setText("");
                 disp.setHint("Perform Operation :)");
 
                 break;
             case R.id.btnAdd:
-               str = str.append(btnAdd.getText());
+                str = str.append(btnAdd.getText());
                 disp.setText(str);
                 break;
             case R.id.btnSub:
@@ -308,31 +333,76 @@ public class MainActivity extends Activity implements OnClickListener {
                 disp.setText(str);
                 break;
             case R.id.btnDiv:
-               str = str.append(btnDiv.getText());
-               disp.setText(str);
-              
-               break;
-            case R.id.btnEnter:
-                try
-                {
-                    int preFixResult =  prefixOperation(disp.getText().toString());
-                    disp.setText("");
-                    disp.setText("Result : " + Integer.toString(preFixResult));
-                }
-               catch(Exeception e)
-               {
-                   op1 = 0;
-                   op2 = 0;
-                   display.setText("");
-                   disp.setHint("Error in parsing, press C to Clear.");
-               }
+                str = str.append(btnDiv.getText());
+                disp.setText(str);
+
                 break;
-        } 
+            case R.id.btnEnter:
+                try {
+                    Log.v(TAG, "Attempting to call prefixOperation: Display is: " + disp.getText().toString());
+                    prefixOperation(disp.getText().toString());
+                    double preFixResult = preFixStack.pop();
+                    mainOpOne = 0;
+                    mainOpTwo = 0;
+                    disp.setText("");
+                    disp.setText("Result : " + Double.toString(preFixResult));
+                } catch (Exception e) {
+                    mainOpOne = 0;
+                    mainOpTwo = 0;
+                    disp.setText("");
+                    disp.setHint("Error in parsing, press C to Clear.");
+                }
+                break;
+        }
     }
-    
-    prefixOperation(String operation)
-    {
-        
+
+    public void prefixOperation(String expression) throws Exception {
+        Log.v(TAG, "prefixOperation(): expression:" + expression);
+
+        if (expression.length() == 0) {
+            Log.v(TAG, "prefixOperation(): Expression Length is zero. Errror.)");
+            throw new IllegalArgumentException("Expression is null");
+        }
+
+        String expArray[] = expression.split("");
+        //create an array by splitting the String on whitespace
+        for (int index = (expArray.length - 1); index >= 0; index--) {
+            //working from the end of the array forward
+            if (expArray[index].matches(UNSIGNED_DOUBLE)) {
+                preFixStack.push(new Double(expArray[index]));
+                //if the value at expArray[x] is a double, push it to the stack
+            }
+            if (expArray[index].matches(CHARACTER)) {
+                calculatePreFixExpression(expArray[index]);
+                //if the value at expArray[x] is an operator, calculate
+            }
+        }//end for loop
+    }
+
+    public void calculatePreFixExpression(String n) throws Exception {
+        Log.v(TAG, "calculatePreFixExpression(), n: " + n);
+        if (preFixStack.size() < 2)
+            throw new IllegalArgumentException("Input expression is invalid");
+        Double op1 = preFixStack.pop();
+        Double op2 = preFixStack.pop();
+        char op = n.charAt(0);
+        switch (op) {
+            case '+':
+                preFixStack.push(op1 + op2);
+                break;
+            case '-':
+                preFixStack.push(op1 - op2);
+                break;
+            case '*':
+                preFixStack.push(op1 * op2);
+                break;
+            case '/':
+                preFixStack.push(op1 / op2);
+                break;
+            default:
+                throw new IllegalArgumentException("Something went wrong in parsing");
+
+        }
     }
 
     public void prefixClicked(View v) {
@@ -369,15 +439,6 @@ public class MainActivity extends Activity implements OnClickListener {
         }
     }
 
-
-    public float prefixParser(String evalString) {
-        return 0;
-    }
-
-    public float postfixParser(String evalString) {
-        return 0;
-    }
-
     public void prepareScreen() {
         //Set variable definitions
         btnAdd = (Button) findViewById(R.id.btnAdd);
@@ -387,6 +448,7 @@ public class MainActivity extends Activity implements OnClickListener {
         disp = (EditText) findViewById(R.id.tvResult);
         prefixCheckbox = (CheckBox) findViewById(R.id.prefix_checkbox);
         postfixCheckbox = (CheckBox) findViewById(R.id.postfix_checkbox);
+        btnZero = (Button) findViewById(R.id.btnZero);
         btnOne = (Button) findViewById(R.id.btnOne);
         btnTwo = (Button) findViewById(R.id.btnTwo);
         btnThree = (Button) findViewById(R.id.btnThree);
@@ -403,6 +465,7 @@ public class MainActivity extends Activity implements OnClickListener {
         btnSub.setOnClickListener(this);
         btnMult.setOnClickListener(this);
         btnDiv.setOnClickListener(this);
+        btnZero.setOnClickListener(this);
         btnOne.setOnClickListener(this);
         btnTwo.setOnClickListener(this);
         btnThree.setOnClickListener(this);

@@ -147,9 +147,10 @@
             android:layout_height="wrap_content"
             android:onClick="prefixClicked"
             android:text="@string/prefix_notation"
-            android:layout_below="@+id/btnZero"
-            android:layout_toRightOf="@+id/btnDiv"
-            android:layout_toEndOf="@+id/btnDiv" />
+            android:layout_alignTop="@+id/postfix_checkbox"
+            android:layout_alignRight="@+id/btnEnter"
+            android:layout_alignEnd="@+id/btnEnter" />
+
 
         <Button
             android:id="@+id/btnSeven"
@@ -214,7 +215,6 @@
             android:text="C"
             android:textSize="8pt"
             android:layout_below="@+id/btnEight"
-            android:layout_toLeftOf="@+id/btnNine"
             android:layout_toEndOf="@+id/prefix_checkbox"
             android:layout_alignLeft="@+id/btnEight"
             android:layout_alignStart="@+id/btnEight" />
