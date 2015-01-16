@@ -134,22 +134,14 @@
             </Button>
 
         <CheckBox
-            android:id="@+id/postfix_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnDiv"
-            android:onClick="postfixClicked"
-            android:text="@string/postfix_notation" />
-
-        <CheckBox
             android:id="@+id/prefix_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="prefixClicked"
             android:text="@string/prefix_notation"
-            android:layout_alignTop="@+id/postfix_checkbox"
             android:layout_alignRight="@+id/btnEnter"
-            android:layout_alignEnd="@+id/btnEnter" />
+            android:layout_alignEnd="@+id/btnEnter"
+            android:layout_below="@+id/btnDiv" />
 
 
         <Button

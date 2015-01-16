@@ -84,22 +84,29 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     public void inFixCalculator(View arg0, Editable str) {
-                switch (arg0.getId()) {
-                    case R.id.btnZero:
+        switch (arg0.getId()) {
+            case R.id.btnZero:
                 if (mainOpTwo != 0) {
                     mainOpTwo = 0;
                     disp.setText("");
+
                 }
                 str = str.append(btnZero.getText());
+
                 disp.setText(str);
             case R.id.btnOne:
                 if (mainOpTwo != 0) {
                     mainOpTwo = 0;
+
                     disp.setText("");
                 }
+
+
                 str = str.append(btnOne.getText());
                 disp.setText(str);
+
                 break;
+
             case R.id.btnTwo:
                 if (mainOpTwo != 0) {
                     mainOpTwo = 0;
@@ -108,6 +115,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 str = str.append(btnTwo.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnThree:
                 if (mainOpTwo != 0) {
                     mainOpTwo = 0;
@@ -116,6 +124,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 str = str.append(btnThree.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnFour:
                 if (mainOpTwo != 0) {
                     mainOpTwo = 0;
@@ -124,6 +133,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 str = str.append(btnFour.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnFive:
                 if (mainOpTwo != 0) {
                     mainOpTwo = 0;
@@ -132,6 +142,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 str = str.append(btnFive.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnSix:
                 if (mainOpTwo != 0) {
                     mainOpTwo = 0;
@@ -140,6 +151,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 str = str.append(btnSix.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnSeven:
                 if (mainOpTwo != 0) {
                     mainOpTwo = 0;
@@ -148,6 +160,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 str = str.append(btnSeven.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnEight:
                 if (mainOpTwo != 0) {
                     mainOpTwo = 0;
@@ -157,6 +170,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 disp.setText(str);
 
                 break;
+
             case R.id.btnNine:
                 if (mainOpTwo != 0) {
                     mainOpTwo = 0;
@@ -166,6 +180,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 disp.setText(str);
 
                 break;
+
             case R.id.cancel:
                 mainOpOne = 0;
                 mainOpTwo = 0;
@@ -173,6 +188,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 disp.setHint("Perform Operation :)");
 
                 break;
+
             case R.id.btnAdd:
                 optr = "+";
                 if (mainOpOne == 0) {
@@ -188,6 +204,7 @@ public class MainActivity extends Activity implements OnClickListener {
                     disp.setText("Result : " + Integer.toString(mainOpOne));
                 }
                 break;
+
             case R.id.btnSub:
                 optr = "-";
                 if (mainOpOne == 0) {
@@ -203,6 +220,7 @@ public class MainActivity extends Activity implements OnClickListener {
                     disp.setText("Result : " + Integer.toString(mainOpOne));
                 }
                 break;
+
             case R.id.btnMult:
                 optr = "*";
                 if (mainOpOne == 0) {
@@ -218,6 +236,7 @@ public class MainActivity extends Activity implements OnClickListener {
                     disp.setText("Result : " + Integer.toString(mainOpOne));
                 }
                 break;
+
             case R.id.btnDiv:
                 optr = "/";
                 if (mainOpOne == 0) {
@@ -233,6 +252,7 @@ public class MainActivity extends Activity implements OnClickListener {
                     disp.setText("Result : " + Integer.toString(mainOpOne));
                 }
                 break;
+
             case R.id.btnEnter:
                 if (!optr.equals(null)) {
                     if (mainOpTwo != 0) {
@@ -262,30 +282,32 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     public void prefixCalculator(View arg0, Editable str) {
-        switch (arg0.getId()) {
-            case R.id.btnZero:
+        Log.v(TAG, "prefixOperation(): string currently equals: " + str);
 
+        switch (arg0.getId()) {
+
+            case R.id.btnZero:
                 str = str.append(btnZero.getText());
                 disp.setText(str);
                 break;
 
             case R.id.btnOne:
-
                 str = str.append(btnOne.getText());
                 disp.setText(str);
                 break;
-            case R.id.btnTwo:
 
+            case R.id.btnTwo:
                 str = str.append(btnTwo.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnThree:
 
                 str = str.append(btnThree.getText());
                 disp.setText(str);
                 break;
-            case R.id.btnFour:
 
+            case R.id.btnFour:
                 str = str.append(btnFour.getText());
                 disp.setText(str);
                 break;
@@ -294,25 +316,30 @@ public class MainActivity extends Activity implements OnClickListener {
                 str = str.append(btnFive.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnSix:
 
                 str = str.append(btnSix.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnSeven:
                 str = str.append(btnSeven.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnEight:
                 str = str.append(btnEight.getText());
                 disp.setText(str);
 
                 break;
+
             case R.id.btnNine:
                 str = str.append(btnNine.getText());
                 disp.setText(str);
 
                 break;
+
             case R.id.cancel: //stays the same as in other function
                 mainOpOne = 0;
                 mainOpTwo = 0;
@@ -320,23 +347,28 @@ public class MainActivity extends Activity implements OnClickListener {
                 disp.setHint("Perform Operation :)");
 
                 break;
+
             case R.id.btnAdd:
                 str = str.append(btnAdd.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnSub:
                 str = str.append(btnSub.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnMult:
                 str = str.append(btnMult.getText());
                 disp.setText(str);
                 break;
+
             case R.id.btnDiv:
                 str = str.append(btnDiv.getText());
                 disp.setText(str);
 
                 break;
+
             case R.id.btnEnter:
                 try {
                     Log.v(TAG, "Attempting to call prefixOperation: Display is: " + disp.getText().toString());
@@ -360,12 +392,13 @@ public class MainActivity extends Activity implements OnClickListener {
         Log.v(TAG, "prefixOperation(): expression:" + expression);
 
         if (expression.length() == 0) {
-            Log.v(TAG, "prefixOperation(): Expression Length is zero. Errror.)");
+            Log.v(TAG, "prefixOperation(): Expression Length is zero. Error.)");
             throw new IllegalArgumentException("Expression is null");
         }
 
         String expArray[] = expression.split("");
         //create an array by splitting the String on whitespace
+
         for (int index = (expArray.length - 1); index >= 0; index--) {
             //working from the end of the array forward
             if (expArray[index].matches(UNSIGNED_DOUBLE)) {
@@ -379,26 +412,35 @@ public class MainActivity extends Activity implements OnClickListener {
         }//end for loop
     }
 
+
     public void calculatePreFixExpression(String n) throws Exception {
         Log.v(TAG, "calculatePreFixExpression(), n: " + n);
+
         if (preFixStack.size() < 2)
             throw new IllegalArgumentException("Input expression is invalid");
+
         Double op1 = preFixStack.pop();
         Double op2 = preFixStack.pop();
+
         char op = n.charAt(0);
         switch (op) {
+
             case '+':
                 preFixStack.push(op1 + op2);
                 break;
+
             case '-':
                 preFixStack.push(op1 - op2);
                 break;
+
             case '*':
                 preFixStack.push(op1 * op2);
                 break;
+
             case '/':
                 preFixStack.push(op1 / op2);
                 break;
+
             default:
                 throw new IllegalArgumentException("Something went wrong in parsing");
 
@@ -411,27 +453,8 @@ public class MainActivity extends Activity implements OnClickListener {
             useInFixParsing = false;
             usePostFixParsing = false;
             usePreFixParsing = true;
-            if (postfixCheckbox.isChecked()) {
-                postfixCheckbox.toggle();
-            }
-        } else //prefix is being unchecked, set defaults back to infix
-        {
-            useInFixParsing = true;
-            usePostFixParsing = false;
-            usePreFixParsing = false;
-        }
-    }
 
-    public void postfixClicked(View v) {
-        if (postfixCheckbox.isChecked()) // if the box is click to be checked, meaning postfix notation is going to be used...
-        {
-            useInFixParsing = false;
-            usePostFixParsing = true;
-            usePreFixParsing = false;
-            if (prefixCheckbox.isChecked()) {
-                prefixCheckbox.toggle();
-            }
-        } else //postfix is being unchecked, set defaults back to infix
+        } else //prefix is being unchecked, set defaults back to infix
         {
             useInFixParsing = true;
             usePostFixParsing = false;
@@ -447,7 +470,6 @@ public class MainActivity extends Activity implements OnClickListener {
         btnDiv = (Button) findViewById(R.id.btnDiv);
         disp = (EditText) findViewById(R.id.tvResult);
         prefixCheckbox = (CheckBox) findViewById(R.id.prefix_checkbox);
-        postfixCheckbox = (CheckBox) findViewById(R.id.postfix_checkbox);
         btnZero = (Button) findViewById(R.id.btnZero);
         btnOne = (Button) findViewById(R.id.btnOne);
         btnTwo = (Button) findViewById(R.id.btnTwo);
@@ -478,5 +500,4 @@ public class MainActivity extends Activity implements OnClickListener {
         btnEnter.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
     }
-
 }
